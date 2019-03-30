@@ -8,7 +8,7 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends chromium
 
 # Install app dependencies
-COPY ./lets-get-lunch ./
+COPY ./Dockerfile-cypress ./
 
 RUN npm install
 
