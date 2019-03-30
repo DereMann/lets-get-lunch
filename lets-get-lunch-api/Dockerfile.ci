@@ -6,7 +6,7 @@ WORKDIR /usr/src/app
 RUN npm install gulp-cli -g
 
 # Install app dependencies
-COPY package*.json .
+COPY package*.json ./
 
 RUN npm install
 
