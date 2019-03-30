@@ -23,7 +23,7 @@ services:
     volumes:
     - ./lets-get-lunch/:/usr/src/app
     - /usr/src/app/node_modules
-    image: "letsgetlunchapp:B${BUILD_NUMBER}"
+    build: ./lets-get-lunch/
     ports:
     - "4200:4200"
     command: bash -c "ng test --watch=false"
