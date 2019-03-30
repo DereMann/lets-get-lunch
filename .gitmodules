@@ -1,0 +1,9 @@
+[submodule "lets-get-lunch-fe"]
+	path = lets-get-lunch-fe
+	url = https://github.com/DereMann/lets-get-lunch-fe
+[submodule "lets-get-lunch-api"]
+	path = lets-get-lunch-api
+	url = https://github.com/DereMann/lets-get-lunch-api
+[submodule "lets-get-lunch"]
+	path = lets-get-lunch
+	url = https://github.com/DereMann/lets-get-lunch-fe

@@ -1,0 +1,44 @@
+version: "3"
+services:
+  cypress:
+    volumes:
+    - ./lets-get-lunch/cypress/:/usr/src/app/cypress
+    build:
+      context: ./lets-get-lunch/
+      dockerfile: Dockerfile-cypress
+    command: bash -c "./node_modules/.bin/cypress verify"
+    depends_on:
+      - web_app
+    network_mode: 'host'
+
+  web_app:
+    volumes:
+    - ./lets-get-lunch/:/usr/src/app
+    - /usr/src/app/node_modules
+    build: ./lets-get-lunch/
+    ports:
+    - "4200:4200"
+    command: bash -c "ng serve --host 0.0.0.0"
+    depends_on:
+    - web_api
+
+  web_api:
+    volumes:
+    - ./lets-get-lunch-api/:/usr/src/app
+    - /usr/src/app/node_modules
+    build: ./lets-get-lunch-api/
+    ports:
+    - "8080:8080"
+    - 9229:9229
+    command: bash -c "gulp && npm run api-test"
+    depends_on:
+    - mongo
+
+  mongo:
+    image: mongo
+    ports:
+    - "27017:27017"
+    volumes:
+    - data-volume:/data/db
+volumes:
+  data-volume:

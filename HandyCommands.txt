@@ -1,0 +1,12 @@
+set all rights for all users in director
+sudo chmod -R 777 /var/DirectoryName
+
+sudo chmod -R 777 .
+
+docker-compose run cypress ./node_modules/.bin/cypress run \
+    --config baseUrl=http://127.0.0.1
+
+    
+
+cd lets-get-lunch/
+git submodule update --init
