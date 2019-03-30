@@ -11,7 +11,7 @@ services:
     volumes:
     - ./lets-get-lunch-api/:/usr/src/app
     - /usr/src/app/node_modules
-    image: "letsgetlunchapi:B${BUILD_NUMBER}"
+    build: ./lets-get-lunch/
     ports:
     - "8080:8080"
     - 9229:9229
