@@ -8,13 +8,13 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends chromium
 
 # Install app dependencies
-COPY package*.json ./
+COPY . .
 
 RUN npm install
 
 ENV CHROME_BIN=chromium
 
-COPY . .
+#COPY . .
 
 #Expose port and start application
 EXPOSE 4200
