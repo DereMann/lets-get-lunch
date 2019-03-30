@@ -3,10 +3,14 @@ FROM node:10
 # Create app directory
 WORKDIR /usr/src/app
 
+RUN npm install gulp-cli -g
+
 # Install app dependencies
 COPY package*.json .
 
-RUN npm install gulp-cli -g && npm install
+RUN npm install
+
+COPY . .
 
 #Expose port and start application
 EXPOSE 8080
