@@ -31,4 +31,4 @@ services:
     - web_api
     
 volumes:
-    dbdata:
+    data-volume:
