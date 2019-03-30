@@ -26,7 +26,7 @@ services:
     image: "letsgetlunchapp:B${BUILD_NUMBER}"
     ports:
     - "4200:4200"
-    command: bash -c "npm install && ng test"
+    command: bash -c "npm install && ng test --watch=false"
     depends_on:
     - web_api
     
