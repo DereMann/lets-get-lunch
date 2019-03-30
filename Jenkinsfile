@@ -7,6 +7,6 @@ node('docker') {
         sh "docker build -t letsgetlunchapi:B${BUILD_NUMBER} -f ./lets-get-lunch-api/Dockerfile ."
 
     stage 'Integration Test'
-        sh "docker-compose -f docker-compose.integration.j.yml up --force-recreate --abort-on-container-exit"
+        sh "docker-compose -f docker-compose.integration.j.yml up --force-recreate --abort-on-container-exit --build"
         sh "docker-compose -f docker-compose.integration.j.yml down -v"
 }
