@@ -15,7 +15,7 @@ services:
     ports:
     - "8080:8080"
     - 9229:9229
-    command: bash -c "npm install gulp-cli -g && npm install && gulp && npm run api-test"
+    command: bash -c "gulp && npm run api-test"
     depends_on:
     - mongo
 
