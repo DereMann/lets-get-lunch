@@ -11,9 +11,9 @@ services:
     volumes:
     - ./lets-get-lunch-api/:/usr/src/app
     - /usr/src/app/node_modules
-    build: ./lets-get-lunch-api/
+    image: "letsgetlunchapi:B${BUILD_NUMBER}"
     ports:
-    - "8080:8080"
+    - "8081:8080"
     - 9229:9229
     command: bash -c "gulp && npm run api-test"
     depends_on:
@@ -23,7 +23,7 @@ services:
     volumes:
     - ./lets-get-lunch/:/usr/src/app
     - /usr/src/app/node_modules
-    build: ./lets-get-lunch/
+    image: "letsgetlunchapp:B${BUILD_NUMBER}"
     ports:
     - "4200:4200"
     command: bash -c "ng test"
