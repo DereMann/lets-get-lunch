@@ -123,7 +123,7 @@ describe('AuthService', () => {
 
     it('should return false if the user is not logged in', () => {
       localStorage.clear('Authorization');
-      expect(authService.isLoggedIn()).toEqual(true);
+      expect(authService.isLoggedIn()).toEqual(false);
     });
   });
 });

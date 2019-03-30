@@ -26,9 +26,16 @@ services:
     image: "letsgetlunchapp:B${BUILD_NUMBER}"
     ports:
     - "4200:4200"
-    command: bash -c "ng test --watch=false"
+    command: bash -c "ng test --watch=false && ng serve --host 0.0.0.0"
     depends_on:
     - web_api
+
+  cypress:
+    image: "letsgetlunchcyp:B${BUILD_NUMBER}"
+    command: bash -c "docker-compose run cypress ./node_modules/.bin/cypress run --config baseUrl=http://127.0.0.1"
+    depends_on:
+      - web_app
+    network_mode: 'host'
     
 volumes:
     data-volume:
