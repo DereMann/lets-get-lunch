@@ -8,7 +8,7 @@ services:
     volumes:
     - data-volume:/data/db
   web_api:
-    volumes:
+    #volumes:
     #- ./lets-get-lunch-api/:/usr/src/app ## don't net a volume mapping in non dev environment
     #- /usr/src/app/node_modules
     image: "letsgetlunchapi:B${BUILD_NUMBER}"
@@ -20,7 +20,7 @@ services:
     - mongo
 
   web_app:
-    volumes:
+    #volumes:
     #- ./lets-get-lunch/:/usr/src/app ## don't net a volume mapping in non dev environment
     #- /usr/src/app/node_modules
     image: "letsgetlunchapp:B${BUILD_NUMBER}"
