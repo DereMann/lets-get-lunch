@@ -36,7 +36,6 @@ services:
     command: ["./wait-for-it.sh", "web_app:4200", "-t", "40", "--", "./node_modules/.bin/cypress", "run", "--config", "baseUrl=http://127.0.0.1"]
     depends_on:
       - web_app
-    network_mode: 'host'
     
 volumes:
     data-volume:
