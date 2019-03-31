@@ -1,9 +1,9 @@
 describe('Signup', () => {
     before(() => {
-        Cypress.config('baseUrl', 'http://web_app:4200');
+        Cypress.config('baseUrl', 'http://localhost:4200');
     });
     beforeEach(() => {
-        cy.request('DELETE', 'http://web_api:8080/api/test');
+        cy.request('DELETE', 'http://localhost:8080/api/test');
     });
 
     it('should navigate to the dashboard with valid credentials', () => {
