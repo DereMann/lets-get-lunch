@@ -2,7 +2,7 @@
 
 describe('Navbar', () => {
     before(() => {
-        Cypress.config('baseUrl', 'web_app:4200');
+        Cypress.config('baseUrl', 'http://web_app:4200');
     });
 
     beforeEach(() => {
@@ -23,7 +23,7 @@ describe('Navbar', () => {
 
     describe('a user who is logged in', () => {
         beforeEach(() => {
-            cy.request('DELETE', 'web_api:8080/api/test');
+            cy.request('DELETE', 'http://web_api:8080/api/test');
             cy.signup();
         });
 
