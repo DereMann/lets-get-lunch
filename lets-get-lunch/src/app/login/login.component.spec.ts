@@ -17,18 +17,18 @@ class LoginPage {
   addPageElements() {
     this.loginBtn = fixture.debugElement.query(By.css('button'));
     this.usernameInput = fixture
-                            .debugElement
-                            .query(By.css('[name=username]'))
-                            .nativeElement;
+      .debugElement
+      .query(By.css('[name=username]'))
+      .nativeElement;
     this.passwordInput = fixture
-                            .debugElement
-                            .query(By.css('[name=password'))
-                            .nativeElement;
+      .debugElement
+      .query(By.css('[name=password'))
+      .nativeElement;
   }
 }
 
 class MockAuthService {
-  login (credentials) {}
+  login(credentials) { }
 }
 
 let component: LoginComponent;
@@ -41,17 +41,17 @@ describe('LoginComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ LoginModule ]
+      imports: [LoginModule]
     })
-    .overrideComponent(LoginComponent, {
-      set: {
-        providers: [
-          { provide: AuthService, useClass: MockAuthService },
-          { provide: Router, useClass: RouterStub}
-        ]
-      }
-    })
-    .compileComponents();
+      .overrideComponent(LoginComponent, {
+        set: {
+          providers: [
+            { provide: AuthService, useClass: MockAuthService },
+            { provide: Router, useClass: RouterStub }
+          ]
+        }
+      })
+      .compileComponents();
   }));
 
   beforeEach(async(() => {
@@ -79,7 +79,7 @@ describe('LoginComponent', () => {
     loginPage.passwordInput.dispatchEvent(new Event('input'));
 
     spyOn(authService, 'login').and.callFake(() => {
-      return Observable.of({token: 'token'});
+      return Observable.of({ token: 'token' });
     })
 
     spyOn(router, 'navigate');
@@ -91,5 +91,24 @@ describe('LoginComponent', () => {
     });
 
     expect(router.navigate).toHaveBeenCalledWith(['/dashboard']);
+  });
+
+  it('should display an error message for a user who does not exist', () => {
+    loginPage.usernameInput.value = 'doesnotexist';
+    loginPage.passwordInput.value = 'doesnotexist';
+    loginPage.usernameInput.dispatchEvent(new Event('input'));
+    loginPage.passwordInput.dispatchEvent(new Event('input'));
+
+    spyOn(authService, 'login').and.callFake(() => {
+      return Observable.throw({ error: { message: 'User could not be found' } });
+    })
+
+    spyOn(router, 'navigate');
+    loginPage.loginBtn.nativeElement.click();
+    fixture.detectChanges();
+
+    expect(router.navigate).not.toHaveBeenCalled();
+    const errorMessage = fixture.debugElement.query(By.css('.alert'));
+    expect(errorMessage.nativeElement.textContent).toEqual('User could not be found');
   });
 });
