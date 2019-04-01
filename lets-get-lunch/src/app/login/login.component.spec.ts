@@ -7,6 +7,7 @@ import { LoginModule } from './login.module';
 import { LoginComponent } from './login.component';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { Observable } from 'rxjs';
 
 class LoginPage {
   loginBtn: DebugElement;
@@ -69,5 +70,26 @@ describe('LoginComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should navigate to dashboard with valid credentials', () => {
+    loginPage.usernameInput.value = 'johndoe';
+    loginPage.passwordInput.value = 'password';
+    loginPage.usernameInput.dispatchEvent(new Event('input'));
+    loginPage.passwordInput.dispatchEvent(new Event('input'));
+
+    spyOn(authService, 'login').and.callFake(() => {
+      return Observable.of({token: 'token'});
+    })
+
+    spyOn(router, 'navigate');
+    loginPage.loginBtn.nativeElement.click();
+
+    expect(authService.login).toHaveBeenCalledWith({
+      username: 'johndoe',
+      password: 'password'
+    });
+
+    expect(router.navigate).toHaveBeenCalledWith(['/dashboard']);
   });
 });
