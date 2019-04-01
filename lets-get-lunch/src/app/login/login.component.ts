@@ -12,6 +12,7 @@ import { ThrowStmt } from '@angular/compiler';
 })
 export class LoginComponent implements OnInit {
   user: User = { username: '', password: ''}; //bound in html file
+  errorMessage: string;
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -22,6 +23,8 @@ export class LoginComponent implements OnInit {
   login(credentials) {
     this.authService.login(credentials).subscribe(res => {
       this.router.navigate(['/dashboard']);
+    }, err => {
+      this.errorMessage = err.error.message;
     });
   };
 }
