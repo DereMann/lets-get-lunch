@@ -8,6 +8,7 @@ describe('Navbar', () => {
     beforeEach(() => {
         cy.visit('/');
     });
+    
 
     describe('a user who isn\'t logged in', () => {
         it('should show a link to signup', () => {
