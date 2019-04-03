@@ -4,7 +4,7 @@ sudo chmod -R 777 /var/DirectoryName
 sudo chmod -R 777 .
 
 docker-compose run cypress ./node_modules/.bin/cypress run \
-    --config baseUrl=http://127.0.0.1
+    --config baseUrl=http://127.0.0.1:4200
 
 docker-compose run cypress ./node_modules/.bin/cypress run \
     --config baseUrl=http://web_app:4200
