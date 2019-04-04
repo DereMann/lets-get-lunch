@@ -45,4 +45,8 @@ export class AuthService {
   isLoggedIn() {
     return !this.jwtHelper.isTokenExpired(this.localStorage.retrieve('Authorization'));
   }
+
+  currentUser() {
+    return this.jwtHelper.decodeToken(this.localStorage.retrieve('Authorization'));
+  }
 }

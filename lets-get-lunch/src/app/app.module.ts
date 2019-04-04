@@ -16,6 +16,10 @@ import { AuthInterceptorService } from './interceptors/auth-interceptor.service'
 import { AuthService } from './services/auth/auth.service';
 import { AuthGuard } from './guards/auth/auth.guard';
 
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { AgmCoreModule } from '@agm/core'
+import { environment } from '../environments/environment';
+
 
 @NgModule({
   declarations: [
@@ -25,6 +29,7 @@ import { AuthGuard } from './guards/auth/auth.guard';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     NgxWebstorageModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
@@ -34,6 +39,10 @@ import { AuthGuard } from './guards/auth/auth.guard';
           return localStorage.getItem('ngx-webstorage|authorization');
         }
       }
+    }),
+    AgmCoreModule.forRoot({
+      apiKey: environment.googleMaps,
+      libraries: ['places']
     })
   ],
   providers: [
