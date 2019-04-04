@@ -11,6 +11,11 @@ import { NgxWebstorageModule, LocalStorageService } from 'ngx-webstorage';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NavbarComponent } from './navbar/navbar.component';
 
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptorService } from './interceptors/auth-interceptor.service';
+import { AuthService } from './services/auth/auth.service';
+import { AuthGuard } from './guards/auth/auth.guard';
+
 
 @NgModule({
   declarations: [
@@ -31,7 +36,15 @@ import { NavbarComponent } from './navbar/navbar.component';
       }
     })
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    AuthGuard,
+    {  // tell the DI to use our interceptor for HTTP interception
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService, 
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
